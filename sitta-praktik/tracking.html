@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tracking pengiriman bahan ajar berdasarkan nomor Delivery Order">
+  <title>Tracking Pengiriman · SITTA Universitas Terbuka</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</head>
+<body data-page="tracking">
+  <a class="skip-link" href="#main">Lewati ke konten utama</a>
+
+  <div class="layout">
+    <aside class="layout-sider" id="appSider" aria-label="Navigasi utama"></aside>
+    <div class="sider-mask" data-action="close-sider"></div>
+
+    <div class="layout-main">
+      <header class="layout-header" id="appHeader"></header>
+
+      <main class="layout-content" id="main">
+        <div class="page-header">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol id="breadcrumb"></ol>
+          </nav>
+          <h1 class="page-title">Tracking Pengiriman</h1>
+          <p class="page-desc">Lacak status pengiriman bahan ajar menggunakan Nomor Delivery Order (DO).</p>
+        </div>
+
+        <!-- Form pencarian DO -->
+        <section class="card" aria-labelledby="trackFormTitle">
+          <header class="card-head">
+            <h2 class="card-title" id="trackFormTitle"><svg class="icon"><use href="#i-search"></use></svg> Cari Delivery Order</h2>
+          </header>
+          <div class="card-body">
+            <form id="trackForm" class="track-search" role="search" novalidate>
+              <div class="form-inline">
+                <div class="form-item">
+                  <label class="sr-only" for="doNumber">Nomor Delivery Order</label>
+                  <div class="input-affix input-lg">
+                    <svg class="icon"><use href="#i-package"></use></svg>
+                    <input class="input" type="text" id="doNumber" name="do" inputmode="numeric" maxlength="10"
+                           placeholder="Masukkan 10 digit Nomor DO, cth. 2023001234"
+                           required pattern="\d{10}" data-pattern-msg="Nomor DO harus berupa 10 digit angka" data-label="Nomor DO" autocomplete="off">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <svg class="icon"><use href="#i-search"></use></svg> Cari
+                </button>
+                <button type="reset" class="btn btn-lg" id="trackReset">Reset</button>
+              </div>
+              <div class="track-examples">
+                <span>Contoh nomor DO:</span>
+                <span id="doExamples" class="space"></span>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Hasil pencarian (diisi oleh script.js) -->
+        <section class="track-result" id="trackResult" aria-live="polite" aria-label="Hasil tracking">
+          <div class="card">
+            <div class="empty">
+              <div class="empty-icon"><svg class="icon"><use href="#i-inbox"></use></svg></div>
+              <p>Belum ada pencarian. Masukkan Nomor DO lalu tekan <strong>Cari</strong>.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="layout-footer">
+        &copy; <span data-year>2026</span> SITTA — Sistem Informasi Tiras &amp; Transaksi Bahan Ajar · Universitas Terbuka
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

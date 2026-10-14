@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Informasi stok bahan ajar Universitas Terbuka">
+  <title>Informasi Bahan Ajar · SITTA Universitas Terbuka</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/data.js"></script>
+  <script src="js/script.js"></script>
+</head>
+<body data-page="stok">
+  <a class="skip-link" href="#main">Lewati ke konten utama</a>
+
+  <div class="layout">
+    <aside class="layout-sider" id="appSider" aria-label="Navigasi utama"></aside>
+    <div class="sider-mask" data-action="close-sider"></div>
+
+    <div class="layout-main">
+      <header class="layout-header" id="appHeader"></header>
+
+      <main class="layout-content" id="main">
+        <div class="page-header">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol id="breadcrumb"></ol>
+          </nav>
+          <div class="space-between">
+            <div>
+              <h1 class="page-title">Informasi Stok Bahan Ajar</h1>
+              <p class="page-desc">Data stok bahan ajar ditampilkan secara dinamis dari <code class="text-mono">dataBahanAjar</code>.</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-modal-open="addModal">
+              <svg class="icon"><use href="#i-plus"></use></svg> Tambah Bahan Ajar
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-4 mb-16" id="stokStats" aria-label="Ringkasan stok"></div>
+
+        <section class="card" aria-label="Daftar bahan ajar">
+          <form class="toolbar" id="stokFilter" role="search" aria-label="Filter bahan ajar">
+            <div class="input-affix">
+              <svg class="icon"><use href="#i-search"></use></svg>
+              <label for="stokSearch" class="sr-only">Cari bahan ajar</label>
+              <input class="input" type="search" id="stokSearch" placeholder="Cari kode / nama bahan ajar…">
+            </div>
+            <label for="stokJenis" class="sr-only">Filter jenis</label>
+            <select class="select" id="stokJenis">
+              <option value="">Semua jenis</option>
+            </select>
+            <label for="stokStatus" class="sr-only">Filter status stok</label>
+            <select class="select" id="stokStatus">
+              <option value="">Semua status stok</option>
+              <option value="aman">Aman (&ge; 300)</option>
+              <option value="cukup">Cukup (200–299)</option>
+              <option value="menipis">Menipis (&lt; 200)</option>
+            </select>
+            <label for="stokSort" class="sr-only">Urutkan</label>
+            <select class="select" id="stokSort">
+              <option value="nama-asc">Nama A–Z</option>
+              <option value="nama-desc">Nama Z–A</option>
+              <option value="stok-desc">Stok terbanyak</option>
+              <option value="stok-asc">Stok tersedikit</option>
+            </select>
+            <span class="toolbar-spacer"></span>
+            <div class="segmented" role="group" aria-label="Mode tampilan">
+              <button type="button" class="segmented-item" data-view-mode="table" aria-pressed="true">
+                <svg class="icon"><use href="#i-list"></use></svg> Tabel
+              </button>
+              <button type="button" class="segmented-item" data-view-mode="grid" aria-pressed="false">
+                <svg class="icon"><use href="#i-grid"></use></svg> Kartu
+              </button>
+            </div>
+          </form>
+
+          <div id="stokTableView">
+            <div class="table-wrapper">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Bahan Ajar</th>
+                    <th scope="col">Kode Lokasi</th>
+                    <th scope="col">Jenis</th>
+                    <th scope="col">Edisi</th>
+                    <th scope="col" style="min-width: 180px">Stok</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="stokBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="stokGridView" class="book-grid" hidden></div>
+
+          <div class="table-footer" id="stokFooter"></div>
+        </section>
+      </main>
+
+      <footer class="layout-footer">
+        &copy; <span data-year>2026</span> SITTA — Sistem Informasi Tiras &amp; Transaksi Bahan Ajar · Universitas Terbuka
+      </footer>
+    </div>
+  </div>
+
+  <!-- Modal: Detail Bahan Ajar -->
+  <dialog class="modal modal-lg" id="detailModal" aria-labelledby="detailTitle">
+    <div class="modal-content">
+      <button type="button" class="modal-close" data-modal-close aria-label="Tutup">
+        <svg class="icon"><use href="#i-close"></use></svg>
+      </button>
+      <header class="modal-header">
+        <h2 class="modal-title" id="detailTitle">Detail Bahan Ajar</h2>
+      </header>
+      <div class="modal-body" id="detailBody"></div>
+      <footer class="modal-footer" id="detailFooter"></footer>
+    </div>
+  </dialog>
+
+  <!-- Modal: Tambah Bahan Ajar -->
+  <dialog class="modal" id="addModal" aria-labelledby="addTitle">
+    <div class="modal-content">
+      <button type="button" class="modal-close" data-modal-close aria-label="Tutup">
+        <svg class="icon"><use href="#i-close"></use></svg>
+      </button>
+      <header class="modal-header">
+        <h2 class="modal-title" id="addTitle">Tambah Bahan Ajar</h2>
+        <p class="modal-subtitle">Data disimpan di browser (localStorage) karena belum menggunakan back-end.</p>
+      </header>
+
+      <form id="addForm" class="modal-body" novalidate>
+        <div class="form-row">
+          <div class="form-item compact">
+            <label class="form-label required" for="addKodeBarang">Kode Barang</label>
+            <input class="input" type="text" id="addKodeBarang" name="kodeBarang" placeholder="cth. MKDU4111" required
+                   pattern="[A-Za-z]{4}\d{4}" data-pattern-msg="Format: 4 huruf + 4 angka (cth. MKDU4111)" data-label="Kode barang" maxlength="8" autocomplete="off">
+          </div>
+          <div class="form-item compact">
+            <label class="form-label required" for="addKodeLokasi">Kode Lokasi</label>
+            <input class="input" type="text" id="addKodeLokasi" name="kodeLokasi" placeholder="cth. 0JKT01" required
+                   pattern="[A-Za-z0-9]{4,10}" data-pattern-msg="4–10 karakter huruf/angka" data-label="Kode lokasi" maxlength="10" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="form-item compact">
+          <label class="form-label required" for="addNama">Nama Bahan Ajar</label>
+          <input class="input" type="text" id="addNama" name="namaBarang" placeholder="cth. Pendidikan Kewarganegaraan" required minlength="3" data-label="Nama bahan ajar">
+        </div>
+
+        <div class="form-row">
+          <div class="form-item compact">
+            <label class="form-label required" for="addJenis">Jenis</label>
+            <select class="select" id="addJenis" name="jenisBarang" required data-label="Jenis">
+              <option value="">Pilih jenis</option>
+              <option value="BMP">BMP (Buku Materi Pokok)</option>
+              <option value="BMW">BMW (Buku Materi Wajib)</option>
+              <option value="Modul Praktik">Modul Praktik</option>
+            </select>
+          </div>
+          <div class="form-item compact">
+            <label class="form-label required" for="addEdisi">Edisi</label>
+            <input class="input" type="number" id="addEdisi" name="edisi" placeholder="1" required min="1" max="20" data-label="Edisi">
+          </div>
+        </div>
+
+        <div class="form-item compact">
+          <label class="form-label required" for="addStok">Jumlah Stok</label>
+          <input class="input" type="number" id="addStok" name="stok" placeholder="0" required min="0" max="100000" data-label="Jumlah stok">
+          <p class="form-help">Stok &lt; 200 akan ditandai sebagai <em>Menipis</em>.</p>
+        </div>
+
+        <footer class="modal-footer">
+          <button type="button" class="btn" data-modal-close>Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </footer>
+      </form>
+    </div>
+  </dialog>
+</body>
+</html>
