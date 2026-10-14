@@ -79,8 +79,9 @@
   Store.get(KEYS.bahan, []).forEach(b => dataBahanAjar.push(b));
 
   // Proteksi halaman: halaman selain login wajib punya sesi.
-  const currentFile = location.pathname.split('/').pop() || 'index.html';
-  const isLoginPage = currentFile === 'index.html' || currentFile === 'login.html';
+  // Mendukung URL dengan/tanpa ".html" (mis. hosting Netlify: "/", "/index", "/dashboard").
+  const currentFile = location.pathname.split('/').pop();
+  const isLoginPage = /^(index|login)?(\.html)?$/.test(currentFile);
   const getSession = () => Store.get(KEYS.session, null, sessionStorage) || Store.get(KEYS.session, null);
 
   if (!isLoginPage && !getSession()) {
