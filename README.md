@@ -8,6 +8,15 @@ Aplikasi ini **front-end only**: tidak memakai back-end/database. Semua data dib
 Tampilan mengikuti gaya **Ant Design** (warna, tombol, form, tabel, modal, notifikasi) dan
 mendukung **mode gelap** serta **tampilan mobile**.
 
+## Identitas Mahasiswa
+
+| | |
+| --- | --- |
+| **Nama** | Yosada Dede Aressa |
+| **NIM** | 052984188 |
+| **Program Studi** | Sistem Informasi |
+| **UT Daerah** | UT Surakarta |
+
 ---
 
 ## Daftar Isi
