@@ -103,7 +103,11 @@ Tugas1/
 │   └── style.css       → Seluruh tampilan (design system ala Ant Design + responsive)
 ├── js/
 │   ├── data.js         → Data dummy: dataPengguna, dataBahanAjar, dataTracking
-│   └── script.js       → Seluruh logika JavaScript (DOM, validasi, modal, dll.)
+│   ├── script.js       → Kode bersama: helper, komponen UI, layout, sesi login
+│   ├── login.js        → Khusus halaman login (index.html)
+│   ├── dashboard.js    → Khusus dashboard, laporan, dan histori
+│   ├── tracking.js     → Khusus halaman tracking
+│   └── stok.js         → Khusus halaman stok
 ├── assets/
 │   ├── img/            → Gambar sampul bahan ajar
 │   └── screenshots/    → Screenshot untuk README ini
@@ -120,8 +124,24 @@ Tugas1/
 | `tracking.html`      | Form input Nomor DO. Setelah tombol **Cari** ditekan, tampil nama mahasiswa, status & tahapan pengiriman (progress bar), detail ekspedisi, tanggal kirim, jenis paket, total pembayaran, dan riwayat perjalanan. |
 | `stok.html`          | Daftar bahan ajar yang dibangun dinamis dari `dataBahanAjar`. Ada pencarian, filter, pengurutan, detail, serta form tambah bahan ajar. |
 | `css/style.css`      | Satu file CSS untuk semua halaman. Berisi *design token* (warna, radius, bayangan), komponen (Button, Input, Card, Table, Tag, Modal, Steps, Timeline, dll.), layout, dan aturan responsive. |
-| `js/data.js`         | Data dummy pengganti database. Dimuat sebelum `script.js`. |
-| `js/script.js`       | Satu file JS untuk semua halaman. Halaman aktif dikenali dari atribut `<body data-page="...">`. Isinya dibagi menjadi 10 bagian bernomor: helper umum, penyimpanan & sesi login, komponen UI (notifikasi, pop-up konfirmasi, validasi form), layout, helper data, lalu satu bagian untuk setiap halaman, dan inisialisasi. |
+| `js/data.js`         | Data dummy pengganti database. Dimuat paling awal. |
+| `js/script.js`       | Kode bersama yang dipakai semua halaman: helper (format tanggal/rupiah), penyimpanan & sesi login, proteksi halaman, komponen UI (notifikasi, pop-up konfirmasi, validasi form), menu samping & header, serta helper data delivery order. |
+| `js/login.js`        | Logika halaman login: form login, modal Lupa Password, dan modal Daftar. |
+| `js/dashboard.js`    | Logika dashboard: greeting, ringkasan, serta tampilan Monitoring DO, Rekap Bahan Ajar, dan Histori Transaksi. |
+| `js/tracking.js`     | Logika pencarian Nomor DO dan tampilan status pengiriman. |
+| `js/stok.js`         | Logika tabel stok: cari, filter, urutkan, detail, tambah, dan hapus bahan ajar. |
+
+Setiap HTML hanya memuat file JS yang dibutuhkannya, dengan urutan
+`data.js` → `script.js` → file khusus halaman. Contoh di `stok.html`:
+
+```html
+<script src="js/data.js"></script>
+<script src="js/script.js"></script>
+<script src="js/stok.js"></script>
+```
+
+File khusus halaman ditutup dengan `onPageReady(initStokPage)` (atau fungsi awal
+halaman lainnya), sehingga kode halaman dijalankan setelah HTML selesai dimuat.
 | `assets/img/`        | Sampul buku yang dipakai oleh `dataBahanAjar` (properti `cover`). |
 | `assets/screenshots/`| Gambar dokumentasi; tidak dipakai oleh aplikasi. |
 | `soal/`              | Screenshot soal Tugas Praktik 1 sebagai acuan: [soal1](soal/soal1.png), [soal2](soal/soal2.png), [soal3](soal/soal3.png), [soal4](soal/soal4.png). Tidak dipakai oleh aplikasi. |
@@ -225,7 +245,7 @@ Form **Tambah Bahan Ajar** dengan validasi:
 | **1.2 Desain CSS** | *Design token* dengan CSS variables, komponen seragam ala Ant Design, Flexbox & Grid, dan responsive (desktop → tablet → mobile). |
 | **1.3 JavaScript DOM** | Render dinamis tabel, statistik, dan grafik batang dari `data.js`, pencarian & filter langsung, salam & jam real-time, modal, dropdown, menu samping, perpindahan tampilan via `#hash`, serta tambah/hapus data. |
 | **1.4 Validasi form & alert** | Validasi langsung saat mengetik (wajib isi, format email, panjang minimal, pola Nomor DO 10 digit, kode barang, angka min/max, konfirmasi password). Pop-up login gagal, konfirmasi logout/hapus, dan notifikasi *toast* sukses/error. |
-| **1.5 Modularitas file** | Struktur folder sesuai ketentuan. Satu `style.css` dan satu `script.js` yang dibagi per modul, sementara data terpisah di `data.js`. Sider & header dirender dari satu fungsi agar seragam di semua halaman. |
+| **1.5 Modularitas file** | Struktur folder sesuai ketentuan. Data (`data.js`), kode bersama (`script.js`), dan kode per halaman (`login.js`, `dashboard.js`, `tracking.js`, `stok.js`) dipisah, sehingga setiap halaman hanya memuat kode yang dibutuhkan. Komponen seperti sider, header, notifikasi, pop-up, dan validasi form ditulis sekali di `script.js` lalu dipakai semua halaman. |
 | **1.6 Kreativitas** | Akun demo "isi otomatis", tahapan pengiriman (Steps) + timeline, tombol salin Nomor DO, tautan langsung `tracking.html?do=...`, tampilan mobile dengan menu samping berbentuk laci. |
 
 ---
