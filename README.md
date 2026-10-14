@@ -27,20 +27,20 @@ Tidak perlu instalasi apa pun. Pilih salah satu cara:
 
 **Cara 1 — Buka langsung (paling mudah)**
 
-1. Buka folder `sitta-praktik/`.
+1. Buka folder proyek `Tugas1/`.
 2. Klik dua kali file `index.html` (akan terbuka di browser).
 3. Login dengan akun demo di bawah.
 
 **Cara 2 — VS Code Live Server**
 
-1. Buka folder `sitta-praktik/` di VS Code.
+1. Buka folder proyek `Tugas1/` di VS Code.
 2. Install ekstensi **Live Server** (Ritwick Dey).
 3. Klik kanan `index.html` → **Open with Live Server**.
 
 **Cara 3 — Server lokal via terminal**
 
 ```bash
-cd sitta-praktik
+cd Tugas1
 python3 -m http.server 8000
 # lalu buka http://localhost:8000
 ```
@@ -75,7 +75,7 @@ Nomor Delivery Order (DO) untuk uji halaman Tracking:
 ## Struktur Folder
 
 ```
-sitta-praktik/
+Tugas1/
 ├── index.html          → Halaman Login (+ modal Lupa Password & Daftar)
 ├── dashboard.html      → Dashboard / menu utama, Laporan, dan Histori Transaksi
 ├── tracking.html       → Tracking pengiriman berdasarkan Nomor DO
