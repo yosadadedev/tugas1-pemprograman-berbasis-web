@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Tracking pengiriman bahan ajar berdasarkan nomor Delivery Order">
   <title>Tracking Pengiriman · SITTA Universitas Terbuka</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/data.js"></script>
   <script src="js/script.js"></script>
@@ -31,7 +32,7 @@
         <!-- Form pencarian DO -->
         <section class="card" aria-labelledby="trackFormTitle">
           <header class="card-head">
-            <h2 class="card-title" id="trackFormTitle"><svg class="icon"><use href="#i-search"></use></svg> Cari Delivery Order</h2>
+            <h2 class="card-title" id="trackFormTitle"><i class="bi bi-search" aria-hidden="true"></i> Cari Delivery Order</h2>
           </header>
           <div class="card-body">
             <form id="trackForm" class="track-search" role="search" novalidate>
@@ -39,14 +40,14 @@
                 <div class="form-item">
                   <label class="sr-only" for="doNumber">Nomor Delivery Order</label>
                   <div class="input-affix input-lg">
-                    <svg class="icon"><use href="#i-package"></use></svg>
+                    <i class="bi bi-box-seam" aria-hidden="true"></i>
                     <input class="input" type="text" id="doNumber" name="do" inputmode="numeric" maxlength="10"
                            placeholder="Masukkan 10 digit Nomor DO, cth. 2023001234"
                            required pattern="\d{10}" data-pattern-msg="Nomor DO harus berupa 10 digit angka" data-label="Nomor DO" autocomplete="off">
                   </div>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg">
-                  <svg class="icon"><use href="#i-search"></use></svg> Cari
+                  <i class="bi bi-search" aria-hidden="true"></i> Cari
                 </button>
                 <button type="reset" class="btn btn-lg" id="trackReset">Reset</button>
               </div>
@@ -62,7 +63,7 @@
         <section class="track-result" id="trackResult" aria-live="polite" aria-label="Hasil tracking">
           <div class="card">
             <div class="empty">
-              <div class="empty-icon"><svg class="icon"><use href="#i-inbox"></use></svg></div>
+              <div class="empty-icon"><i class="bi bi-inbox" aria-hidden="true"></i></div>
               <p>Belum ada pencarian. Masukkan Nomor DO lalu tekan <strong>Cari</strong>.</p>
             </div>
           </div>
@@ -70,7 +71,7 @@
       </main>
 
       <footer class="layout-footer">
-        &copy; <span data-year>2026</span> SITTA — Sistem Informasi Tiras &amp; Transaksi Bahan Ajar · Universitas Terbuka
+        &copy; 2026 SITTA — Sistem Informasi Tiras &amp; Transaksi Bahan Ajar · Universitas Terbuka
       </footer>
     </div>
   </div>

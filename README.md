@@ -6,7 +6,7 @@ Tugas Praktik 1 — Pemrograman Berbasis Web.
 Aplikasi ini **front-end only**: tidak memakai back-end/database. Semua data dibaca dari file
 `js/data.js`, dan data tambahan (akun baru, bahan ajar baru) disimpan di `localStorage` browser.
 Tampilan mengikuti gaya **Ant Design** (warna, tombol, form, tabel, modal, notifikasi) dan
-mendukung **mode gelap** serta **tampilan mobile**.
+mendukung **tampilan mobile**.
 
 ## Identitas Mahasiswa
 
@@ -56,6 +56,9 @@ python3 -m http.server 8000
 
 > Browser yang disarankan: Chrome, Edge, Firefox, atau Safari versi terbaru
 > (aplikasi memakai elemen `<dialog>` untuk modal).
+>
+> Ikon memakai **Bootstrap Icons** dari CDN, jadi butuh koneksi internet agar ikon tampil.
+> Tanpa internet aplikasi tetap berjalan normal, hanya ikonnya yang tidak muncul.
 
 ---
 
@@ -90,7 +93,7 @@ Tugas1/
 ├── tracking.html       → Tracking pengiriman berdasarkan Nomor DO
 ├── stok.html           → Informasi stok bahan ajar
 ├── css/
-│   └── style.css       → Seluruh tampilan (design system ala Ant Design + mode gelap + responsive)
+│   └── style.css       → Seluruh tampilan (design system ala Ant Design + responsive)
 ├── js/
 │   ├── data.js         → Data dummy: dataPengguna, dataBahanAjar, dataTracking
 │   └── script.js       → Seluruh logika JavaScript (DOM, validasi, modal, dll.)
@@ -107,10 +110,10 @@ Tugas1/
 | `index.html`         | Halaman pertama yang dibuka. Berisi form login (email & password), tombol **Lupa Password** dan **Daftar** yang membuka modal. Jika sudah login, otomatis diarahkan ke dashboard. |
 | `dashboard.html`     | Menu utama setelah login. Menampilkan salam sesuai waktu (pagi/siang/sore/malam), ringkasan statistik, dan tombol navigasi. Halaman ini juga memuat 3 tampilan laporan yang dibuka lewat alamat `#monitoring`, `#rekap`, dan `#histori`. |
 | `tracking.html`      | Form input Nomor DO. Setelah tombol **Cari** ditekan, tampil nama mahasiswa, status & tahapan pengiriman (progress bar), detail ekspedisi, tanggal kirim, jenis paket, total pembayaran, dan riwayat perjalanan. |
-| `stok.html`          | Daftar bahan ajar yang dibangun dinamis dari `dataBahanAjar`. Ada pencarian, filter, pengurutan, tampilan tabel/kartu, detail, serta form tambah bahan ajar. |
-| `css/style.css`      | Satu file CSS untuk semua halaman. Berisi *design token* (warna, radius, bayangan), komponen (Button, Input, Card, Table, Tag, Modal, Steps, Timeline, dll.), layout, mode gelap, dan aturan responsive/print. |
+| `stok.html`          | Daftar bahan ajar yang dibangun dinamis dari `dataBahanAjar`. Ada pencarian, filter, pengurutan, detail, serta form tambah bahan ajar. |
+| `css/style.css`      | Satu file CSS untuk semua halaman. Berisi *design token* (warna, radius, bayangan), komponen (Button, Input, Card, Table, Tag, Modal, Steps, Timeline, dll.), layout, dan aturan responsive. |
 | `js/data.js`         | Data dummy pengganti database. Dimuat sebelum `script.js`. |
-| `js/script.js`       | Satu file JS untuk semua halaman. Halaman aktif dikenali dari atribut `<body data-page="...">`. Isinya dibagi per modul: Storage, Ikon, Utilitas, Komponen UI (Message, Modal, Validator), Auth, Domain, Layout, dan logika tiap halaman. |
+| `js/script.js`       | Satu file JS untuk semua halaman. Halaman aktif dikenali dari atribut `<body data-page="...">`. Isinya dibagi menjadi 10 bagian bernomor: helper umum, penyimpanan & sesi login, komponen UI (notifikasi, pop-up konfirmasi, validasi form), layout, helper data, lalu satu bagian untuk setiap halaman, dan inisialisasi. |
 | `assets/img/`        | Sampul buku yang dipakai oleh `dataBahanAjar` (properti `cover`). |
 | `assets/screenshots/`| Gambar dokumentasi; tidak dipakai oleh aplikasi. |
 
@@ -189,29 +192,19 @@ Tampilan tabel (dinamis dari `dataBahanAjar`):
 
 ![Stok tabel](assets/screenshots/12-stok-tabel.png)
 
-Tampilan kartu:
+Detail bahan ajar (klik salah satu baris):
 
-![Stok kartu](assets/screenshots/13-stok-kartu.png)
-
-Detail bahan ajar (klik baris/kartu):
-
-![Detail bahan ajar](assets/screenshots/14-stok-detail.png)
+![Detail bahan ajar](assets/screenshots/13-stok-detail.png)
 
 Form **Tambah Bahan Ajar** dengan validasi:
 
-![Tambah bahan ajar](assets/screenshots/15-stok-tambah.png)
+![Tambah bahan ajar](assets/screenshots/14-stok-tambah.png)
 
-### 8. Mode Gelap
-
-Klik ikon bulan/matahari di header untuk berganti tema. Pilihan tema diingat browser.
-
-![Mode gelap](assets/screenshots/16-dark-mode.png)
-
-### 9. Tampilan Mobile
+### 8. Tampilan Mobile
 
 | Dashboard | Menu samping |
 | --------- | ------------ |
-| ![Mobile dashboard](assets/screenshots/17-mobile-dashboard.png) | ![Mobile menu](assets/screenshots/18-mobile-menu.png) |
+| ![Mobile dashboard](assets/screenshots/15-mobile-dashboard.png) | ![Mobile menu](assets/screenshots/16-mobile-menu.png) |
 
 ---
 
@@ -220,11 +213,11 @@ Klik ikon bulan/matahari di header untuk berganti tema. Pilihan tema diingat bro
 | Kriteria | Implementasi |
 | -------- | ------------ |
 | **1.1 HTML semantik & valid** | `<!DOCTYPE html>`, `lang="id"`, `<header>`, `<nav>`, `<main>`, `<aside>`, `<section>`, `<article>`, `<footer>`, `<dialog>`, `<dl>` untuk detail, `<table>` dengan `<thead>/<tbody>/<tfoot>` dan `scope`, `<time datetime>`, label untuk setiap input, atribut ARIA, dan *skip link*. |
-| **1.2 Desain CSS** | *Design token* dengan CSS variables, komponen seragam ala Ant Design, Flexbox & Grid, animasi halus, mode gelap, responsive (desktop → tablet → mobile), dan gaya cetak (print). |
-| **1.3 JavaScript DOM** | Render dinamis tabel/kartu/statistik dari `data.js`, pencarian & filter langsung, salam & jam real-time, modal, dropdown, menu samping, animasi angka/bar, perpindahan tampilan via `#hash`, serta tambah/hapus data. |
+| **1.2 Desain CSS** | *Design token* dengan CSS variables, komponen seragam ala Ant Design, Flexbox & Grid, dan responsive (desktop → tablet → mobile). |
+| **1.3 JavaScript DOM** | Render dinamis tabel, statistik, dan grafik batang dari `data.js`, pencarian & filter langsung, salam & jam real-time, modal, dropdown, menu samping, perpindahan tampilan via `#hash`, serta tambah/hapus data. |
 | **1.4 Validasi form & alert** | Validasi langsung saat mengetik (wajib isi, format email, panjang minimal, pola Nomor DO 10 digit, kode barang, angka min/max, konfirmasi password). Pop-up login gagal, konfirmasi logout/hapus, dan notifikasi *toast* sukses/error. |
 | **1.5 Modularitas file** | Struktur folder sesuai ketentuan. Satu `style.css` dan satu `script.js` yang dibagi per modul, sementara data terpisah di `data.js`. Sider & header dirender dari satu fungsi agar seragam di semua halaman. |
-| **1.6 Kreativitas** | Mode gelap, akun demo "isi otomatis", tampilan tabel/kartu, tahapan pengiriman (Steps) + timeline, tombol salin Nomor DO, tautan langsung `tracking.html?do=...`, laporan bisa dicetak, menu samping yang bisa diperkecil, tampilan mobile. |
+| **1.6 Kreativitas** | Akun demo "isi otomatis", tahapan pengiriman (Steps) + timeline, tombol salin Nomor DO, tautan langsung `tracking.html?do=...`, tampilan mobile dengan menu samping berbentuk laci. |
 
 ---
 
@@ -238,6 +231,6 @@ Klik ikon bulan/matahari di header untuk berganti tema. Pilihan tema diingat bro
 - **Status DO** ditentukan dari riwayat perjalanan. Contoh: DO `2023005678` berstatus "Dikirim" di data,
   tetapi riwayat terakhirnya "Selesai Antar", sehingga ditampilkan sebagai **Diterima (100%)**.
 - **Penyimpanan browser** (`localStorage`/`sessionStorage`) dipakai untuk: sesi login ("Ingat saya"),
-  akun hasil daftar, bahan ajar tambahan, pilihan tema, dan mode tampilan stok.
+  akun hasil daftar, dan bahan ajar tambahan.
   Untuk mengembalikan ke data awal, hapus *site data* browser atau jalankan `localStorage.clear()` di Console.
 - Halaman login bernama `index.html` (bukan `login.html`) mengikuti struktur folder pada soal.

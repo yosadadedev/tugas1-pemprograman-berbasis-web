@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Dashboard SITTA — menu utama pemesanan bahan ajar Universitas Terbuka">
-  <title>Dashboard · SITTA Universitas Terbuka</title>
+  <title>Dashboard - SITTA Universitas Terbuka</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/data.js"></script>
   <script src="js/script.js"></script>
@@ -28,11 +29,11 @@
         </div>
 
         <!-- ===================== VIEW: BERANDA ===================== -->
-        <section data-view="home" aria-labelledby="greetingTitle">
+        <section data-view="dashboard" aria-labelledby="greetingTitle">
           <div class="greeting" id="greeting" data-period="pagi">
             <div>
               <span class="greeting-eyebrow" id="greetingEyebrow">
-                <svg class="icon"><use href="#i-sunrise"></use></svg> Pagi
+                <i class="bi bi-sunrise" aria-hidden="true"></i> Pagi
               </span>
               <h1 class="greeting-title" id="greetingTitle">Selamat Pagi!</h1>
               <p class="greeting-sub" id="greetingSub">Semoga harimu menyenangkan.</p>
@@ -55,8 +56,8 @@
               <li>
                 <a class="card nav-tile" href="stok.html">
                   <div class="nav-tile-head">
-                    <span class="nav-tile-icon tone-blue"><svg class="icon"><use href="#i-book"></use></svg></span>
-                    <svg class="icon nav-tile-arrow"><use href="#i-arrow-right"></use></svg>
+                    <span class="nav-tile-icon tone-blue"><i class="bi bi-book" aria-hidden="true"></i></span>
+                    <i class="bi bi-arrow-right nav-tile-arrow" aria-hidden="true"></i>
                   </div>
                   <h3 class="nav-tile-title">Informasi Bahan Ajar</h3>
                   <p class="nav-tile-desc">Lihat stok, edisi, dan lokasi bahan ajar yang tersedia.</p>
@@ -65,8 +66,8 @@
               <li>
                 <a class="card nav-tile" href="tracking.html">
                   <div class="nav-tile-head">
-                    <span class="nav-tile-icon tone-green"><svg class="icon"><use href="#i-truck"></use></svg></span>
-                    <svg class="icon nav-tile-arrow"><use href="#i-arrow-right"></use></svg>
+                    <span class="nav-tile-icon tone-green"><i class="bi bi-truck" aria-hidden="true"></i></span>
+                    <i class="bi bi-arrow-right nav-tile-arrow" aria-hidden="true"></i>
                   </div>
                   <h3 class="nav-tile-title">Tracking Pengiriman</h3>
                   <p class="nav-tile-desc">Lacak status pengiriman berdasarkan nomor Delivery Order.</p>
@@ -75,20 +76,20 @@
               <li>
                 <div class="card nav-tile">
                   <div class="nav-tile-head">
-                    <span class="nav-tile-icon tone-purple"><svg class="icon"><use href="#i-report"></use></svg></span>
+                    <span class="nav-tile-icon tone-purple"><i class="bi bi-file-earmark-text" aria-hidden="true"></i></span>
                   </div>
                   <h3 class="nav-tile-title">Laporan</h3>
                   <div class="nav-sublinks">
-                    <a class="nav-sublink" href="#monitoring">Monitoring Progress DO <svg class="icon"><use href="#i-right"></use></svg></a>
-                    <a class="nav-sublink" href="#rekap">Rekap Bahan Ajar <svg class="icon"><use href="#i-right"></use></svg></a>
+                    <a class="nav-sublink" href="#monitoring">Monitoring Progress DO <i class="bi bi-chevron-right" aria-hidden="true"></i></a>
+                    <a class="nav-sublink" href="#rekap">Rekap Bahan Ajar <i class="bi bi-chevron-right" aria-hidden="true"></i></a>
                   </div>
                 </div>
               </li>
               <li>
                 <a class="card nav-tile" href="#histori">
                   <div class="nav-tile-head">
-                    <span class="nav-tile-icon tone-orange"><svg class="icon"><use href="#i-history"></use></svg></span>
-                    <svg class="icon nav-tile-arrow"><use href="#i-arrow-right"></use></svg>
+                    <span class="nav-tile-icon tone-orange"><i class="bi bi-clock-history" aria-hidden="true"></i></span>
+                    <i class="bi bi-arrow-right nav-tile-arrow" aria-hidden="true"></i>
                   </div>
                   <h3 class="nav-tile-title">Histori Transaksi</h3>
                   <p class="nav-tile-desc">Riwayat transaksi pemesanan bahan ajar beserta total pembayaran.</p>
@@ -100,7 +101,7 @@
           <div class="grid grid-main-side mt-24">
             <article class="card">
               <header class="card-head">
-                <h2 class="card-title"><svg class="icon"><use href="#i-truck"></use></svg> Pengiriman Terbaru</h2>
+                <h2 class="card-title"><i class="bi bi-truck" aria-hidden="true"></i> Pengiriman Terbaru</h2>
                 <a href="#monitoring" class="btn btn-link">Lihat semua</a>
               </header>
               <div class="card-body flush" id="homeRecentDO"></div>
@@ -108,7 +109,7 @@
 
             <article class="card">
               <header class="card-head">
-                <h2 class="card-title"><svg class="icon"><use href="#i-package"></use></svg> Stok Bahan Ajar</h2>
+                <h2 class="card-title"><i class="bi bi-box-seam" aria-hidden="true"></i> Stok Bahan Ajar</h2>
                 <a href="stok.html" class="btn btn-link">Detail</a>
               </header>
               <div class="card-body" id="homeStock"></div>
@@ -123,9 +124,6 @@
               <h1 class="page-title" id="monitoringTitle">Monitoring Progress DO Bahan Ajar</h1>
               <p class="page-desc">Pantau progres setiap Delivery Order dari proses hingga diterima.</p>
             </div>
-            <button type="button" class="btn no-print" data-action="print">
-              <svg class="icon"><use href="#i-printer"></use></svg> Cetak
-            </button>
           </div>
 
           <div class="grid grid-4 mb-16" id="monitoringStats"></div>
@@ -141,7 +139,7 @@
                     <th scope="col">Tgl Kirim</th>
                     <th scope="col">Status</th>
                     <th scope="col" style="min-width: 200px">Progress</th>
-                    <th scope="col" class="no-print"><span class="sr-only">Aksi</span></th>
+                    <th scope="col"><span class="sr-only">Aksi</span></th>
                   </tr>
                 </thead>
                 <tbody id="monitoringBody"></tbody>
@@ -157,9 +155,6 @@
               <h1 class="page-title" id="rekapTitle">Rekap Bahan Ajar</h1>
               <p class="page-desc">Ringkasan jumlah judul dan stok bahan ajar di seluruh lokasi.</p>
             </div>
-            <button type="button" class="btn no-print" data-action="print">
-              <svg class="icon"><use href="#i-printer"></use></svg> Cetak
-            </button>
           </div>
 
           <div class="grid grid-4 mb-16" id="rekapStats"></div>
@@ -167,7 +162,7 @@
           <div class="grid grid-main-side">
             <article class="card">
               <header class="card-head">
-                <h2 class="card-title"><svg class="icon"><use href="#i-chart"></use></svg> Distribusi Stok per Judul</h2>
+                <h2 class="card-title"><i class="bi bi-bar-chart-line" aria-hidden="true"></i> Distribusi Stok per Judul</h2>
                 <div class="legend" aria-hidden="true">
                   <span><i></i> Stok aman</span>
                   <span><i class="is-warning"></i> Perlu restock</span>
@@ -180,7 +175,7 @@
 
             <article class="card">
               <header class="card-head">
-                <h2 class="card-title"><svg class="icon"><use href="#i-pin"></use></svg> Rekap per Lokasi</h2>
+                <h2 class="card-title"><i class="bi bi-geo-alt" aria-hidden="true"></i> Rekap per Lokasi</h2>
               </header>
               <div class="table-wrapper">
                 <table class="table table-sm">
@@ -206,15 +201,12 @@
               <h1 class="page-title" id="historiTitle">Histori Transaksi Bahan Ajar</h1>
               <p class="page-desc">Daftar seluruh transaksi pemesanan bahan ajar melalui Delivery Order.</p>
             </div>
-            <button type="button" class="btn no-print" data-action="print">
-              <svg class="icon"><use href="#i-printer"></use></svg> Cetak
-            </button>
           </div>
 
           <article class="card">
             <form class="toolbar" id="historiFilter" role="search" aria-label="Filter transaksi">
               <div class="input-affix">
-                <svg class="icon"><use href="#i-search"></use></svg>
+                <i class="bi bi-search" aria-hidden="true"></i>
                 <label for="historiSearch" class="sr-only">Cari transaksi</label>
                 <input class="input" type="search" id="historiSearch" placeholder="Cari nomor DO, nama, ekspedisi…">
               </div>
@@ -247,7 +239,7 @@
       </main>
 
       <footer class="layout-footer">
-        &copy; <span data-year>2026</span> SITTA — Sistem Informasi Tiras &amp; Transaksi Bahan Ajar · Universitas Terbuka
+        &copy; 2026 SITTA — Sistem Informasi Tiras &amp; Transaksi Bahan Ajar · Universitas Terbuka
       </footer>
     </div>
   </div>
