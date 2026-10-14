@@ -8,6 +8,9 @@ Aplikasi ini **front-end only**: tidak memakai back-end/database. Semua data dib
 Tampilan mengikuti gaya **Ant Design** (warna, tombol, form, tabel, modal, notifikasi) dan
 mendukung **tampilan mobile**.
 
+🌐 **Demo online:** <https://sitta-ut-yosada.netlify.app/>
+(login dengan `rina@ut.ac.id` / `rina123`)
+
 ## Identitas Mahasiswa
 
 | | |
@@ -34,19 +37,23 @@ mendukung **tampilan mobile**.
 
 Tidak perlu instalasi apa pun. Pilih salah satu cara:
 
-**Cara 1 — Buka langsung (paling mudah)**
+**Cara 1 — Buka versi online (tanpa unduh)**
+
+Kunjungi <https://sitta-ut-yosada.netlify.app/> lalu login dengan akun demo di bawah.
+
+**Cara 2 — Buka file langsung**
 
 1. Buka folder proyek `Tugas1/`.
 2. Klik dua kali file `index.html` (akan terbuka di browser).
 3. Login dengan akun demo di bawah.
 
-**Cara 2 — VS Code Live Server**
+**Cara 3 — VS Code Live Server**
 
 1. Buka folder proyek `Tugas1/` di VS Code.
 2. Install ekstensi **Live Server** (Ritwick Dey).
 3. Klik kanan `index.html` → **Open with Live Server**.
 
-**Cara 3 — Server lokal via terminal**
+**Cara 4 — Server lokal via terminal**
 
 ```bash
 cd Tugas1
