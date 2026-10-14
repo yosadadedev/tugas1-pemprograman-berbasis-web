@@ -100,6 +100,7 @@ Tugas1/
 ├── assets/
 │   ├── img/            → Gambar sampul bahan ajar
 │   └── screenshots/    → Screenshot untuk README ini
+├── soal/               → Screenshot soal tugas (soal1.png – soal4.png)
 └── README.md           → Dokumentasi (file ini)
 ```
 
@@ -116,6 +117,7 @@ Tugas1/
 | `js/script.js`       | Satu file JS untuk semua halaman. Halaman aktif dikenali dari atribut `<body data-page="...">`. Isinya dibagi menjadi 10 bagian bernomor: helper umum, penyimpanan & sesi login, komponen UI (notifikasi, pop-up konfirmasi, validasi form), layout, helper data, lalu satu bagian untuk setiap halaman, dan inisialisasi. |
 | `assets/img/`        | Sampul buku yang dipakai oleh `dataBahanAjar` (properti `cover`). |
 | `assets/screenshots/`| Gambar dokumentasi; tidak dipakai oleh aplikasi. |
+| `soal/`              | Screenshot soal Tugas Praktik 1 sebagai acuan: [soal1](soal/soal1.png), [soal2](soal/soal2.png), [soal3](soal/soal3.png), [soal4](soal/soal4.png). Tidak dipakai oleh aplikasi. |
 
 ### Alur antar halaman
 
